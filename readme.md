@@ -25,3 +25,8 @@ Now that ver 0.1 is complete, checkout a new branch and push it to github
 ```git push origin ver0_1```
 
 check your github to make sure the branch is available
+
+
+ver 0.2
+===
+test get and post to server

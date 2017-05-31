@@ -21,3 +21,15 @@ app.get( '/', function( req, res ){
   console.log( 'in base url' );
   res.sendFile( path.resolve( 'views/index.html' ) );
 }); // end base url
+
+// get route
+app.get( '/images', function( req, res ){
+  console.log( 'get hit to /images' );
+  res.send( 'quack' );
+}); // end /images get
+
+// post route
+app.post( '/images', function( req, res ){
+  console.log( 'post hit to /images:', req.body );
+  res.send( 'ribbet' );
+});
