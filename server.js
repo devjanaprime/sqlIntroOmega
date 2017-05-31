@@ -39,12 +39,25 @@ app.get( '/images', function( req, res ){
     if( err ){
       console.log( 'error conencting to db' );
       done();
-      res.send( 'totally vomitsnotfartburp' );
+      res.send( 'totally vomitsnotfartburst' );
     } // end Error
     else{
       console.log( 'connected to db' )
-      done();
-      res.send( 'connection established' );
+      var allImages = [];
+      // create our query string
+      // tell db to run query
+      // hold results in variable
+      var resultSet = connection.query( 'SELECT * from pictable' );
+      resultSet.on( 'row', function( row ){
+        // loop through result set and push each row into an array
+        allImages.push( row );
+      }); // end
+      resultSet.on( 'end', function(){
+        // close connection
+        done();
+        // send back data
+        res.send( allImages );
+      });
     } // end no error
   }); // end pool connect
 }); // end /images get
