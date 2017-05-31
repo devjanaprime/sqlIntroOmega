@@ -72,3 +72,23 @@ create a new pool with this config:
 ```
 var pool = new pg.Pool( config );
 ```
+
+in successful connection:
+```
+console.log( 'connected to db' )
+var allImages = [];
+// create our query string
+// tell db to run query
+// hold results in variable
+var resultSet = connection.query( 'SELECT * from pictable' );
+resultSet.on( 'row', function( row ){
+  // loop through result set and push each row into an array
+  allImages.push( row );
+}); // end
+resultSet.on( 'end', function(){
+  // close connection
+  done();
+  // send back data
+  res.send( allImages );
+});
+```
