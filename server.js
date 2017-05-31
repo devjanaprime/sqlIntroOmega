@@ -3,9 +3,18 @@ var express = require( 'express' );
 var app = express();
 var path = require( 'path' );
 var bodyParser = require( 'body-parser' );
+var pg = require( 'pg' );
 
 // globals
 var port = 9001;
+var config = {
+  database: 'omegapics',
+  host: 'localhost',
+  port: 5432, // default port for localhost postgres databases
+  max: 12
+};
+
+var pool = new pg.Pool( config );
 
 // uses
 app.use( express.static( 'public' ) );
@@ -25,7 +34,19 @@ app.get( '/', function( req, res ){
 // get route
 app.get( '/images', function( req, res ){
   console.log( 'get hit to /images' );
-  res.send( 'quack' );
+  // connect to db
+  pool.connect( function( err, connection, done ){
+    if( err ){
+      console.log( 'error conencting to db' );
+      done();
+      res.send( 'totally vomitsnotfartburp' );
+    } // end Error
+    else{
+      console.log( 'connected to db' )
+      done();
+      res.send( 'connection established' );
+    } // end no error
+  }); // end pool connect
 }); // end /images get
 
 // post route
