@@ -1,15 +1,22 @@
 $( document ).ready( function(){
   console.log( 'JQ' );
 
+  $( '#addImageButton' ).on( 'click', function(){
+    console.log( 'addImageButton on click' );
+    // get user input
+    var userInput = {
+      description: $( '#descriptionIn' ).val(),
+      url: $( '#urlIn' ).val()
+    }; //end userInput
+    addImage( userInput );
+  }); // end on click addImageButton
+
   // init page
   getImages();
 }); // end doc ready
 
-var addImage = function(){
+var addImage = function( objectToSend ){
   // test get call to server
-  var objectToSend = {
-    thing: 'meow'
-  }; //end objectToSend
   $.ajax({
     type: 'POST',
     url: '/images',
