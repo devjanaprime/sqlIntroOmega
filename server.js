@@ -65,5 +65,20 @@ app.get( '/images', function( req, res ){
 // post route
 app.post( '/images', function( req, res ){
   console.log( 'post hit to /images:', req.body );
-  res.send( 'ribbet' );
-});
+  pool.connect( function( err, connection, done ){
+    if( err ){
+      console.log( err );
+      done();
+      res.send( 400 );
+    }// end error
+    else{
+      console.log( 'connected to db' );
+      connection.query( "INSERT INTO pictable ( description, url ) values ( '" + req.body.description + "', '" + req.body.url + "' )" );
+      /**** insert reference
+      INSERT INTO <table> (<column>, ...) VALUES (<value>)
+      ***/
+      done();
+      res.send( 200 );
+    } // end no error
+  }); // end pool connect
+}); // end /images post

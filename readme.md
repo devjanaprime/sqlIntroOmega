@@ -99,7 +99,9 @@ connected to db, display on DOM
 
 oldschool JS/JQ
 
-ver 0.6
-===
 interface for adding an image
 test post to server
+
+ver 0.6
+===
+insert user input into the database
