@@ -104,4 +104,14 @@ test post to server
 
 ver 0.6
 ===
+
 insert user input into the database
+
+ver 0.6
+===
+
+update insert query secure using wildcards:
+
+```
+connection.query( "INSERT INTO pictable ( description, url ) values ( $1, $2 )", [ req.body.description, req.body.url ] );
+```

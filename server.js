@@ -73,10 +73,7 @@ app.post( '/images', function( req, res ){
     }// end error
     else{
       console.log( 'connected to db' );
-      connection.query( "INSERT INTO pictable ( description, url ) values ( '" + req.body.description + "', '" + req.body.url + "' )" );
-      /**** insert reference
-      INSERT INTO <table> (<column>, ...) VALUES (<value>)
-      ***/
+      connection.query( "INSERT INTO pictable ( description, url ) values ( $1, $2 )", [ req.body.description, req.body.url ] );
       done();
       res.send( 200 );
     } // end no error
