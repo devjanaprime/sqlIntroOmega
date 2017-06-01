@@ -1,5 +1,8 @@
 $( document ).ready( function(){
   console.log( 'JQ' );
+
+  // init page
+  getImages();
 }); // end doc ready
 
 var addImage = function(){
@@ -24,6 +27,19 @@ var getImages = function(){
     url: '/images',
     success: function( response ){
       console.log( 'back from get call with:', response );
+      displayImages( response );
     } // end success
   }); // end ajax
 }; // end getImages
+
+var displayImages = function( imagesArray ){
+  // output div
+  var outputDiv = $( '#outputDiv' );
+  outputDiv.empty();
+  // loop through imagesArray
+  // append each to the dom
+  for (var i = 0; i < imagesArray.length; i++) {
+    outputDiv.append( '<p>' + imagesArray[i].description + '</p>' );
+    outputDiv.append( '<img src=' + imagesArray[i].url + '>' );
+  } // end for
+}; // end displayImages

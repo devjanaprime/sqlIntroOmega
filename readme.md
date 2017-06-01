@@ -92,3 +92,9 @@ resultSet.on( 'end', function(){
   res.send( allImages );
 });
 ```
+
+ver 0.5
+===
+connected to db, display on DOM
+
+oldschool JS/JQ
